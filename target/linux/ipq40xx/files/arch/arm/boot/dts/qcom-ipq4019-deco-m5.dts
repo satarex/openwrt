@@ -55,15 +55,8 @@
 			gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
 		};
 	};
-	soc {
-		
-		tcsr@194b000 {
-			compatible = "qcom,tcsr";
-			reg = <0x194b000 0x100>;
-			qcom,usb-hsphy-mode-select = <TCSR_USB_HSPHY_HOST_MODE>;
-			status = "okay";
-		};
-		
+	soc {	
+
 		edma@c080000 {
 			status = "okay";
 		};
@@ -81,9 +74,13 @@
         ess-psgmii@98000 {
 			status = "okay";
 		};
-
-		//TODO : add rng ??
-
+				
+		tcsr@194b000 {
+			compatible = "qcom,tcsr";
+			reg = <0x194b000 0x100>;
+			qcom,usb-hsphy-mode-select = <TCSR_USB_HSPHY_HOST_MODE>;
+			status = "okay";
+		};
 
 		tcsr@1949000 {
 			compatible = "qcom,tcsr";
@@ -199,79 +196,78 @@
 			#size-cells = <1>;
 			compatible = "fixed-partitions";
 
-			partition0@0 {
+			partition@0 {
 				label = "0:SBL1";
 				reg = <0x00000000 0x00030000>;
 				read-only;
 			};
-			partition1@30000 {
+			partition@30000 {
 				label = "0:BOOTCONFIG";
 				reg = <0x00030000 0x00010000>;
 				read-only;
 			};
-			partition2@40000 {
+			partition@40000 {
 				label = "0:MIBIB";
 				reg = <0x00040000 0x00010000>;
 				read-only;
 			};
-			partition3@50000 {
+			partition@50000 {
 				label = "0:BOOTCONFIG1";
 				reg = <0x00050000 0x00010000>;
 				read-only;
 			};
-			partition4@60000 {
+			partition@60000 {
 				label = "0:QSEE";
 				reg = <0x00060000 0x00060000>;
 				read-only;
 			};
-			partition5@c0000 {
+			partition@c0000 {
 				label = "0:CDT";
 				reg = <0x000c0000 0x00010000>;
 				read-only;
 			};
-			partition6@d0000 {
+			partition@d0000 {
 				label = "0:DDRPARAMS";
 				reg = <0x000d0000 0x00010000>;
 				read-only;
 			};
-			partition7@e0000 {
+			partition@e0000 {
 				label = "0:APPSBLENV";
 				reg = <0x000e0000 0x00010000>;
 				read-only;
 			};
-			partition8@f0000 {
+			partition@f0000 {
 				label = "0:APPSBL";
 				reg = <0x000f0000 0x00080000>;
 				read-only;
 			};
-			partition9@170000 {
+			partition@170000 {
 				label = "0:ART";
 				reg = <0x00170000 0x00010000>;
 				read-only;
 			};
-			partition10@180000 {
+			partition@180000 {
 				label = "OPAQUE";
 				reg = <0x00180000 0x000c0000>;
 				read-only;
 			};
-			partition11@240000 {
+			partition@240000 {
 				label = "0:HLOS";
 				reg = <0x00240000 0x00300000>;
 				read-only;
 			};
-			partition12@540000 {
+			partition@540000 {
 				label = "0:rootfs";
 				reg = <0x00540000 0x007d0000>;
 				read-only;
 			};
-			partition13@d10000 {
+			partition@d10000 {
 				label = "0:APPSBL_1";
 				reg = <0x00d10000 0x00080000>;
 				read-only;
 			};
-			partition14@d90000 {
+			partition@d90000 {
 				label = "firmware";
-				compatible = "denx,fit";
 				reg = <0x00d90000 0x01040000>;
 			};
 		};
@@ -321,6 +317,10 @@
 };
 
 &cryptobam {
+	status = "okay";
+};
+
+&prng {
 	status = "okay";
 };
 
